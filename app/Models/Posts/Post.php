@@ -3,11 +3,12 @@
 namespace App\Models\Posts;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Posts\Post;
+
 
 class Post extends Model
 {
     const UPDATED_AT = null;
-    const CREATED_AT = null;
 
     protected $fillable = [
         'user_id',
@@ -25,6 +26,7 @@ class Post extends Model
 
     public function subCategories(){
         // リレーションの定義
+        return $this->belongsToMany('App\Models\Categories\SubCategory');
     }
 
     // コメント数

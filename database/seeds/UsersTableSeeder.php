@@ -12,6 +12,17 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        User::create([
+            'over_name' => '鈴木',
+            'under_name' => '未来',
+            'over_name_kana' => 'スズキ',
+            'under_name_kana' => 'ミライ',
+            'mail_address' => ' smirai0717@gmail.com',
+            'sex' => '1',
+            'birth_day' => '1998-7-17',
+            'role' => '4',
+            'password' => 'Miraidesu0717',
+        ]);
 
     }
 }

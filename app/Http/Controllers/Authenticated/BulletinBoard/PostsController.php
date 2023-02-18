@@ -45,9 +45,12 @@ class PostsController extends Controller
 
     public function postInput(){
         $main_categories = MainCategory::get();
+        // dd($main_categories);
+
         return view('authenticated.bulletinboard.post_create', compact('main_categories'));
     }
 
+    //投稿を登録
     public function postCreate(PostFormRequest $request){
         $post = Post::create([
             'user_id' => Auth::id(),

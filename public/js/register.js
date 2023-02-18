@@ -1,6 +1,6 @@
 $(function () {
   $(document).on('click', '.other_role', function () {
-    $('.select_teacher').removeClass('d-none');
+    $('.select_teacher').removeClass('d-none');//display:none
   });
   $(document).on('click', '.admin_role', function () {
     $('.select_teacher').addClass('d-none');
@@ -91,6 +91,7 @@ $(function () {
       $('.role').removeClass('success_role');
     }
 
+    //すべてのinputにsucessがついたらボタンが押せるようになる
     if ($('.over_name').hasClass('success_name') && $('.over_name_kana').hasClass('success_name_kana') && $('.under_name').hasClass('success_under_name') && $('.under_name_kana').hasClass('success_under_name_kana') && $('.mail_address').hasClass('success_mail_address') && $('.password').hasClass('success_password') && $('.password_confirmation').hasClass('success_password_confirm') && $('.sex').hasClass('success_sex') && $('.old_year').hasClass('success_year') && $('.old_month').hasClass('success_month') && $('.old_day').hasClass('success_day') && $('.role').hasClass('success_role')) {
       $('.register_btn').prop('disabled', false);
     } else {

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use DB;
 
+
 use App\Models\Users\Subjects;
 
 class RegisterController extends Controller
@@ -59,6 +60,28 @@ class RegisterController extends Controller
 
     public function registerPost(Request $request)
     {
+        // $validator = $request->validate([
+        //     'over_name' => 'required | string | max:10 ',
+        //     'under_name' => 'required | string | max:10 ',
+        //     'over_name_kana' => 'required | string | max:30 ',
+        //     'under_name_kana' => 'required | string | max:30 ',
+        //     'mail_address' => 'required | max:100 | email | unique:users',
+        //     'sex' => 'required',
+        //     'old_year' => 'required',
+        //     'old_month' => 'required',
+        //     'old_day' => 'required',
+        //     'role' => 'required',
+        //     'password' => 'required | between:8,30 | confirmed',
+        // ]);
+
+        // $validate_collection = $validator->collect();
+        
+        //   if ($validate_collection->fails()) {
+        //     return redirect()->back()
+        //     ->withInput()
+        //     ->withErrors($validator);
+        //   }
+
         DB::beginTransaction();
         try{
             $old_year = $request->old_year;
