@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             'under_name_kana' => 'ミライ',
             'mail_address' => ' smirai0717@gmail.com',
             'sex' => '1',
-            'birth_day' => '1998-7-17',
+            'birth_day' => '2000-7-17',
             'role' => '4',
             'password' => 'Miraidesu0717',
         ]);

@@ -7,7 +7,11 @@
     @foreach($posts as $post)
     <div class="post_area border w-75 m-auto p-3">
       <p><span>{{ $post->user->over_name }}</span><span class="ml-3">{{ $post->user->under_name }}</span>さん</p>
+      <p>{{ $post->updated_at }}</p>
       <p><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->post_title }}</a></p>
+      @foreach($post->subCategories as $subCategory)
+      <p class="badge bg-secondary">{{ $subCategory->sub_category}}</p>
+      @endforeach
       <div class="post_bottom_area d-flex">
         <div class="d-flex post_status">
           <div class="mr-5">
@@ -37,6 +41,9 @@
       <ul>
         @foreach($categories as $category)
         <li class="main_categories" category_id="{{ $category->id }}"><span>{{ $category->main_category }}<span></li>
+         @foreach($category->subCategories as $subCategory)
+         <li><button type="submit" value="{{ $subCategory->id }}" name="category_word" form="postSearchRequest">{{ $subCategory->sub_category }}</button></li>
+         @endforeach
         @endforeach
       </ul>
     </div>

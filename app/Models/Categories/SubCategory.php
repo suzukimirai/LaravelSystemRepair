@@ -22,7 +22,7 @@ class SubCategory extends Model
 
     public function posts(){
         // リレーションの定義
-        return $this->belongsToMany(Post::class);
+        return $this->belongsToMany('App\Models\Posts\Post');
 
     }
 }

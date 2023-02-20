@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Categories\MainCategory;
 use App\Models\Categories\SubCategory;
 use App\Models\Posts\Post;
+use App\Models\Post_sub_category;
 use App\Models\Posts\PostComment;
 use App\Models\Posts\Like;
 use App\Models\Users\User;
@@ -20,18 +21,21 @@ class PostsController extends Controller
         $categories = MainCategory::get();
         $like = new Like;
         $post_comment = new Post;
-        if(!empty($request->keyword)){
+        if(!empty($request->keyword)){//キーワード検索
             $posts = Post::with('user', 'postComments')
             ->where('post_title', 'like', '%'.$request->keyword.'%')
             ->orWhere('post', 'like', '%'.$request->keyword.'%')->get();
-        }else if($request->category_word){
-            $sub_category = $request->category_word;
-            $posts = Post::with('user', 'postComments')->get();
-        }else if($request->like_posts){
+        }else if($request->category_word){//カテゴリー検索
+            $sub_category_id = $request->category_word;
+            // $subCategory = new subCategory;
+            $sub_category = new SubCategory;
+            $post_id = $sub_category->find($sub_category_id)->posts()->pluck('post_id');
+            $posts = Post::whereIn('id',$post_id)->get();
+        }else if($request->like_posts){//いいねした投稿
             $likes = Auth::user()->likePostId()->get('like_post_id');
             $posts = Post::with('user', 'postComments')
             ->whereIn('id', $likes)->get();
-        }else if($request->my_posts){
+        }else if($request->my_posts){//自分の投稿
             $posts = Post::with('user', 'postComments')
             ->where('user_id', Auth::id())->get();
         }
@@ -57,6 +61,11 @@ class PostsController extends Controller
             'post_title' => $request->post_title,
             'post' => $request->post_body
         ]);
+
+        // $post_category_id = $request->post_category_id;//サブカテゴリ―のID取得
+
+        $post->subCategories()->attach($request->post_category_id);
+
         return redirect()->route('post.show');
     }
 

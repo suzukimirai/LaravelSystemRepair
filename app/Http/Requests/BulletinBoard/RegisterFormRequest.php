@@ -4,13 +4,34 @@ namespace App\Http\Requests\BulletinBoard;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostFormRequest extends FormRequest
+class RegisterFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
+
+     public function getValidatorInstance()
+     {
+     
+     $datetime_year = $this->input('old_year', array());
+     $datetime_month = $this->input('old_month', array());
+     $datetime_day = $this->input('old_day', array());
+
+     
+     
+     $datetime_validation = $datetime_year.'-'.$datetime_month.'-'.$datetime_day;
+     
+     $this->merge([
+        'datetime_validation' => $datetime_validation,
+     ]);
+     
+     return parent::getValidatorInstance();
+     
+    }
+
+
     public function authorize()
     {
         return true;
@@ -30,9 +51,7 @@ class PostFormRequest extends FormRequest
             'under_name_kana' => 'required | string | max:30 ',
             'mail_address' => 'required | max:100 | email | unique:users',
             'sex' => 'required',
-            'old_year' => 'required',
-            'old_month' => 'required',
-            'old_day' => 'required',
+            'datetime_validation' => 'required | after:2000-01-01 | before:today',
             'role' => 'required',
             'password' => 'required | between:8,30 | confirmed',
         ];
@@ -40,10 +59,16 @@ class PostFormRequest extends FormRequest
 
     public function messages(){
         return [
-            'post_title.min' => 'タイトルは4文字以上入力してください。',
-            'post_title.max' => 'タイトルは50文字以内で入力してください。',
-            'post_body.min' => '内容は10文字以上入力してください。',
-            'post_body.max' => '最大文字数は500文字です。',
+            'over_name.max' => '姓は10文字以下で入力してください。',
+            'under_name.max' => '名は10文字以下で入力してください。',
+            'over_name_kana.max' => '姓をカナで10文字以下で入力してください。',
+            'under_name_kana.max' => '名をカナで10文字以下で入力してください。',
+            'password.confirmed' => 'パスワードは一致させてください',
+            'password.between:8,30' => 'パスワードを8～30文字で入力してください',
+            'datetime_validation.after:2000-01-01' => '無効の日付です',
+            'mail_address.email' => '無効のメールアドレスです',
+
+
         ];
     }
 }
