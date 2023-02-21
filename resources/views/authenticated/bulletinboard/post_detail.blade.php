@@ -15,6 +15,9 @@
 
         <div class="contributor d-flex">
           <p>
+            @foreach($post->subCategories as $sub_category)
+              <span class="badge bg-secondary">{{ $sub_category->sub_category}}</span>
+            @endforeach
             <span>{{ $post->user->over_name }}</span>
             <span>{{ $post->user->under_name }}</span>
             さん

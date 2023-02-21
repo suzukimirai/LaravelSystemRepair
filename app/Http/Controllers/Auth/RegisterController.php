@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\Users\User;
+use App\Models\Users\Subject;
+
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -55,7 +57,7 @@ class RegisterController extends Controller
      */
     public function registerView()
     {
-        $subjects = Subjects::all();
+        $subjects = Subject::all();
         return view('auth.register.register', compact('subjects'));
     }
 
@@ -83,14 +85,15 @@ class RegisterController extends Controller
         //     ->withErrors($validator);
         //   }
 
-        DB::beginTransaction();
-        try{
+        // DB::beginTransaction();
+        // try{
             $old_year = $request->old_year;
             $old_month = $request->old_month;
             $old_day = $request->old_day;
             $data = $old_year . '-' . $old_month . '-' . $old_day;
             $birth_day = date('Y-m-d', strtotime($data));
             $subjects = $request->subject;
+            // dd($subjects);
 
             $user_get = User::create([
                 'over_name' => $request->over_name,
@@ -103,13 +106,13 @@ class RegisterController extends Controller
                 'role' => $request->role,
                 'password' => bcrypt($request->password)
             ]);
-            $user = User::findOrFail($user_get->id);
-            $user->subjects()->attach($subjects);
-            DB::commit();
+            $user = User::findOrFail($user_get->id);//今登録したユーザーからuser_idを作る
+            $user_get->subjects()->attach($subjects);//今登録したユーザーからuser_idを作る
+            // DB::commit();
             return view('auth.login.login');
-        }catch(\Exception $e){
-            DB::rollback();
-            return redirect()->route('loginView');
-        }
+        // }catch(\Exception $e){
+        //     DB::rollback();
+        //     return redirect()->route('loginView');
+        // }
     }
 }
