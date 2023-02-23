@@ -33,4 +33,9 @@ class Post extends Model
     public function commentCounts($post_id){
         return Post::with('postComments')->find($post_id)->postComments();
     }
+
+    public function likesCounts($post_id){
+        return Like::where('like_post_id', $post_id)->count('id');
+    }
+
 }

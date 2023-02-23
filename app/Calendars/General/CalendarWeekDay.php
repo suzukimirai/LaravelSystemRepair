@@ -9,11 +9,11 @@ class CalendarWeekDay{
   protected $carbon;
 
   function __construct($date){
-    $this->carbon = new Carbon($date);
+    $this->carbon = new Carbon($date);//2023-01-30
   }
 
   function getClassName(){
-    return "day-" . strtolower($this->carbon->format("D"));
+    return "day-" . strtolower($this->carbon->format("D"));// strtolowerは小文字変換 //day-sat,day-sunだったら文字色を変更することなどができる
   }
 
   function pastClassName(){
@@ -25,7 +25,7 @@ class CalendarWeekDay{
    */
 
    function render(){
-     return '<p class="day">' . $this->carbon->format("j"). '日</p>';
+     return '<p class="day">' . $this->carbon->format("j"). '日</p>';//何日の部分のHTML
    }
 
    function selectPart($ymd){

@@ -106,7 +106,7 @@ class RegisterController extends Controller
                 'role' => $request->role,
                 'password' => bcrypt($request->password)
             ]);
-            $user = User::findOrFail($user_get->id);//今登録したユーザーからuser_idを作る
+            $user = User::findOrFail($user_get->id);
             $user_get->subjects()->attach($subjects);//今登録したユーザーからuser_idを作る
             // DB::commit();
             return view('auth.login.login');

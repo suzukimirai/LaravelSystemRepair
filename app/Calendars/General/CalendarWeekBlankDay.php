@@ -1,9 +1,9 @@
 <?php
 namespace App\Calendars\General;
 
-class CalendarWeekBlankDay extends CalendarWeekDay{
+class CalendarWeekBlankDay extends CalendarWeekDay{//extendsなんだっけ？？
   function getClassName(){
-    return "day-blank";
+    return "day-blank";//背景をグレーにする
   }
 
   /**

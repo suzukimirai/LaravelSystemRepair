@@ -41,8 +41,13 @@
     <div class="category_area mt-5 p-5">
       <div class="">
         <p class="m-0">メインカテゴリー</p>
-        <input type="text" class="w-100" name="main_category_name" form="mainCategoryRequest">
+        <input type="text" class="w-100" name="main_category_name" form="mainCategoryRequest" required>
         <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="mainCategoryRequest">
+        @if($errors->has('main_category'))
+          @foreach ($errors->get('main_category') as $error)
+            <li>{{$error}}</li>
+          @endforeach
+        @endif
       </div>
       <form action="{{ route('main.category.create') }}" method="post" id="mainCategoryRequest">{{ csrf_field() }}</form>
       <div class="">
@@ -52,8 +57,13 @@
             <option value="{{ $main_category->id }}" >{{ $main_category->main_category }}</option>
           @endforeach
         </select>
-        <input type="text" class="w-100" name="sub_category_name" form="subCategoryRequest">
+        <input type="text" class="w-100" name="sub_category_name" form="subCategoryRequest" required>
         <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="subCategoryRequest">
+        @if($errors->has('sub_category'))
+          @foreach ($errors->get('sub_category') as $error)
+            <li>{{$error}}</li>
+          @endforeach
+        @endif
       </div>
       <form action="{{ route('sub.category.create') }}" method="post" id="subCategoryRequest">{{ csrf_field() }}</form>
     </div>
