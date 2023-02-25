@@ -23,7 +23,7 @@ class CalendarView{
   }
 
   function render(){
-    $html = [];
+    $html = [];//配列変数を定義する
     $html[] = '<div class="calendar text-center">';
     $html[] = '<table class="table">';
     $html[] = '<thead>';
@@ -42,21 +42,21 @@ class CalendarView{
 
     $weeks = $this->getWeeks();//getWeeksメソッドは下にあるよ!! //配列で[0,1,2,...]と入っている
     foreach($weeks as $week){//一週目、二週目と回していく。そのたびに<tr>で囲まれるから七日で一列になる
-      $html[] = '<tr class="'.$week->getClassName().'">';//週クラス名の付与
+      $html[] = '<tr class="'.$week->getClassName().'">';//週クラス名の付与 //$weekにはCalendarWeekインスタンス化した情報が入っている。
 
-      $days = $week->getDays();//一週目の場合、week-0でgetDays
-      foreach($days as $day){//七日分のデータが入っている。一個づつ吐き出す。
+      $days = $week->getDays();//一週目の場合、week-0でgetDays //CalendarWeekインスタンスの中にあるgetDays関数を呼ぶ
+      foreach($days as $day){//一回目だったら一週目七日分のデータが入っている。一個づつ吐き出す。
         $startDay = $this->carbon->copy()->format("Y-m-01");//dを01にして強制的に一日にしてる？？
         $toDay = $this->carbon->copy()->format("Y-m-d");//フォーマットの違いは？？？
 
-        if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-          $html[] = '<td class="calendar-td">';//ここはどこの部分？？
+        if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){//なんの条件分岐？？ //今日より前か後で違うクラスの付与
+          $html[] = '<td class="calendar-td past-day border">';//過去日だったら
         }else{
-          $html[] = '<td class="calendar-td '.$day->getClassName().'">';//曜日が入る。day-mon day-blankなど
+          $html[] = '<td class="calendar-td '.$day->getClassName().'">';//曜日が入る。//CalenderWeek(Blank)Dayインスタンスの中に入っている。day-mon day-blankなど
         }
-        $html[] = $day->render();//何日を作る。1日 2日の部分。blankの方だったら何も入らない。
+        $html[] = $day->render();//何日を作るHTML。1日 2日の部分。blankの方だったら何も入らない。
 
-        if(in_array($day->everyDay(), $day->authReserveDay())){
+        if(in_array($day->everyDay(), $day->authReserveDay())){//in_array関数、第一引数には、検索する値を指定し、第二引数には対象の配列を指定します。//予約してたら「リモ～部」で赤くなる
           $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
           if($reservePart == 1){
             $reservePart = "リモ1部";
@@ -66,19 +66,37 @@ class CalendarView{
             $reservePart = "リモ3部";
           }
           if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
-            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">'.$reservePart.'</p>';//過去日にスクール参加しているので「リモ一部」」を出す
+            // $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }else{
-            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
-            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';//予約ボタン
+            // $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }
-        }else{
+        }elseif($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){//予約してなかったら、セレクトを出す
+
+          if(in_array($day->everyDay(), $day->authReserveDay())){//過去日にスクール参加していたらtrue
+            $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
+            if($reservePart == 1){
+              $html[] = '<p>リモ1部</p>';
+            }else if($reservePart == 2){
+              $html[] = '<p>リモ2部</p>';
+            }else if($reservePart == 3){
+              $html[] = '<p>リモ3部</p>';
+            }
+  
+          }else{//過去日にスクール参加していなかったら
+            $html[] = '<p>受付終了</p>';
+          }
+
+         }else{
           $html[] = $day->selectPart($day->everyDay());
+          $html[] = $day->getDate();//input hidden getData[]を出す
         }
-        $html[] = $day->getDate();
+
+        // $html[] = $day->getDate();
         $html[] = '</td>';
       }
-      $html[] = '</tr>';//week tr 終わり
+      $html[] = '</tr>';//week <tr> 終わり
     }
 
     //↓ここからHTML固定部分
@@ -88,11 +106,11 @@ class CalendarView{
     $html[] = '<form action="/reserve/calendar" method="post" id="reserveParts">'.csrf_field().'</form>';
     $html[] = '<form action="/delete/calendar" method="post" id="deleteParts">'.csrf_field().'</form>';
 
-    return implode('', $html);
+    return implode('', $html);//最終的にrenderの戻り値となる
   }
 
   protected function getWeeks(){
-    $weeks = [];
+    $weeks = [];//配列変数を定義する
     $firstDay = $this->carbon->copy()->firstOfMonth();//2月1日
     $lastDay = $this->carbon->copy()->lastOfMonth();//2023-02-28
     $week = new CalendarWeek($firstDay->copy());

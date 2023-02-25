@@ -14,12 +14,6 @@
 </head>
 <body>
 
-@if(count($errors) > 0)
-  @foreach( $errors->all() as $error)
-  <p>{{$error}}</p>
-  @endforeach
-@endif  
-
 <form action="{{ route('registerPost') }}" method="POST">
     <div class="w-100 vh-100 d-flex" style="align-items:center; justify-content:center;">
       <div class="w-25 vh-75 border p-3">
@@ -30,12 +24,19 @@
               <div class="border-bottom border-primary" style="width:140px;">
                 <input type="text" style="width:140px;" class="border-0 over_name" name="over_name" value="{{ old('over_name') }}">
               </div>
+              @foreach ($errors->get('over_name') as $error)
+                <p class="error">※{{ $error }}</p><br>
+              @endforeach
             </div>
             <div class="" style="width:140px">
               <label class=" d-block m-0" style="font-size:13px">名</label>
               <div class="border-bottom border-primary" style="width:140px;">
                 <input type="text" style="width:140px;" class="border-0 under_name" name="under_name" value="{{ old('under_name') }}">
               </div>
+              @foreach ($errors->get('under_name') as $error)
+                <p class="error">※{{ $error }}</p><br>
+              @endforeach
+
             </div>
           </div>
           <div class="d-flex mt-3" style="justify-content:space-between">
@@ -44,12 +45,19 @@
               <div class="border-bottom border-primary" style="width:140px;">
                 <input type="text" style="width:140px;" class="border-0 over_name_kana" name="over_name_kana" value="{{ old('over_name_kana') }}">
               </div>
+              @foreach ($errors->get('over_name_kana') as $error)
+                <p class="error">※{{ $error }}</p><br>
+              @endforeach
+
             </div>
             <div class="" style="width:140px">
               <label class="d-block m-0" style="font-size:13px">メイ</label>
               <div class="border-bottom border-primary" style="width:140px;">
                 <input type="text" style="width:140px;" class="border-0 under_name_kana" name="under_name_kana" value="{{ old('under_name_kana') }}">
               </div>
+              @foreach ($errors->get('under_name_kana') as $error)
+                <p class="error">※{{ $error }}</p><br>
+              @endforeach
             </div>
           </div>
           <div class="mt-3">
@@ -57,6 +65,10 @@
             <div class="border-bottom border-primary">
               <input type="mail" class="w-100 border-0 mail_address" name="mail_address" value="{{ old('mail_address') }}">
             </div>
+            @foreach ($errors->get('mail_address') as $error)
+              <p class="error">※{{ $error }}</p><br>
+            @endforeach
+
           </div>
         </div>
         <div class="mt-3">
@@ -151,6 +163,10 @@
           </select>
           <label style="font-size:13px">月</label>
         </div>
+        @foreach ($errors->get('datetime_validation') as $error)
+            <p class="error">※{{ $error }}</p><br>
+        @endforeach
+
         <div class="mt-3">
           <label class="d-block m-0" style="font-size:13px">役職</label>
           <input type="radio" name="role" id="role-1" class="admin_role role" value="1" {{ old('role') === '1' ? 'checked' : '' }}>
@@ -176,12 +192,20 @@
           <div class="border-bottom border-primary">
             <input type="password" class="border-0 w-100 password" name="password">
           </div>
+          @foreach ($errors->get('password') as $error)
+            <p class="error">※{{ $error }}</p><br>
+          @endforeach
+
         </div>
         <div class="mt-3">
           <label class="d-block m-0" style="font-size:13px">確認用パスワード</label>
           <div class="border-bottom border-primary">
             <input type="password" class="border-0 w-100 password_confirmation" name="password_confirmation">
           </div>
+          @foreach ($errors->get('password_confirmation') as $error)
+            <p class="error">※{{ $error }}</p><br>
+          @endforeach
+
         </div>
         <div class="mt-5 text-right">
           <input type="submit" class="btn btn-primary register_btn" disabled value="新規登録" onclick="return confirm('登録してよろしいですか？')">

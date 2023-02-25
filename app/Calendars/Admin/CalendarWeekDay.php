@@ -3,6 +3,7 @@ namespace App\Calendars\Admin;
 
 use Carbon\Carbon;
 use App\Models\Calendars\ReserveSettings;
+use Illuminate\Support\Facades\Auth;
 
 class CalendarWeekDay{
   protected $carbon;
@@ -31,19 +32,24 @@ class CalendarWeekDay{
 
     $html[] = '<div class="text-left">';
     if($one_part){
-      $html[] = '<p class="day_part m-0 pt-1">1部</p>';
+      $html[] = '<p class="day_part m-0 pt-1"><a href="/calendar/'.Auth::id().'/'.$one_part->setting_reserve.'/'.'1'.'">1部</a><sapn class="ml-2">'.$one_part->users()->count('user_id').'<sapn></p>';
+      // $html[] = '<p class="day_part m-0 pt-1"><a href="/calendar/'.{!! Auth::id() !!}.'/'.{!! $one_part->setting_reserve !!}.'/'.{!! 1 !!}.'">1部</a><sapn class="ml-2">'.$one_part->users()->count('user_id').'<sapn></p>';
+
+      // $html[] = '<p class="day_part m-0 pt-1"><a href=".{{ route('.calendar.admin.detail.' , ['id'=>Auth::id(), 'data' => $one_part->setting_reserve, 'part' => 1 ]) }}.">1部</a><sapn class="ml-2">'.$one_part->users()->count('user_id').'<sapn></p>';
+      // $html[] = '<span>'.$one_part->users()->count('user_id').'</span>';
     }
     if($two_part){
-      $html[] = '<p class="day_part m-0 pt-1">2部</p>';
+      $html[] = '<p class="day_part m-0 pt-1"><a href="/calendar/'.Auth::id().'/'.$two_part->setting_reserve.'/'.'2'.'">2部</a><sapn class="ml-2">'.$two_part->users()->count('user_id').'<sapn></p>';
+      // $html[] = '<span>'.$two_part->users()->count('user_id').'</span>';
     }
     if($three_part){
-      $html[] = '<p class="day_part m-0 pt-1">3部</p>';
+      $html[] = '<p class="day_part m-0 pt-1"><a href="/calendar/'.Auth::id().'/'.$three_part->setting_reserve.'/'.'3'.'">3部</a><sapn class="ml-2">'.$three_part->users()->count('user_id').'<sapn></p>';
+      // $html[] = '<span>'.$three_part->users()->count('user_id').'</span>';
     }
     $html[] = '</div>';
 
     return implode("", $html);
   }
-
 
   function onePartFrame($day){
     $one_part_frame = ReserveSettings::where('setting_reserve', $day)->where('setting_part', '1')->first();

@@ -14,7 +14,7 @@
           <option value="{{ $main_category->subCategory->id }}" >{{ $main_category->subCategory->sub_category }}</option>
           @endforeach
         </optgroup>
-        @endforeach　<!-- メインカテゴリーの終わり -->
+        @endforeach<!-- メインカテゴリーの終わり -->
       </select>
     </div>
     <div class="mt-3">

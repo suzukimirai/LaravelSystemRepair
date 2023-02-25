@@ -17,11 +17,11 @@ class UsersTableSeeder extends Seeder
             'under_name' => '未来',
             'over_name_kana' => 'スズキ',
             'under_name_kana' => 'ミライ',
-            'mail_address' => ' smirai0717@gmail.com',
+            'mail_address' => 'smirai0717@gmail.com',
             'sex' => '1',
             'birth_day' => '2000-7-17',
             'role' => '4',
-            'password' => 'Miraidesu0717',
+            'password' => bcrypt('Miraidesu0717'),
         ]);
 
     }
