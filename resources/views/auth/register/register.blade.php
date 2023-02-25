@@ -25,7 +25,7 @@
                 <input type="text" style="width:140px;" class="border-0 over_name" name="over_name" value="{{ old('over_name') }}">
               </div>
               @foreach ($errors->get('over_name') as $error)
-                <p class="error">※{{ $error }}</p><br>
+                <p class="error_message">※{{ $error }}</p><br>
               @endforeach
             </div>
             <div class="" style="width:140px">
@@ -34,7 +34,7 @@
                 <input type="text" style="width:140px;" class="border-0 under_name" name="under_name" value="{{ old('under_name') }}">
               </div>
               @foreach ($errors->get('under_name') as $error)
-                <p class="error">※{{ $error }}</p><br>
+                <p class="error_message">※{{ $error }}</p><br>
               @endforeach
 
             </div>
@@ -46,7 +46,7 @@
                 <input type="text" style="width:140px;" class="border-0 over_name_kana" name="over_name_kana" value="{{ old('over_name_kana') }}">
               </div>
               @foreach ($errors->get('over_name_kana') as $error)
-                <p class="error">※{{ $error }}</p><br>
+                <p class="error_message">※{{ $error }}</p><br>
               @endforeach
 
             </div>
@@ -56,7 +56,7 @@
                 <input type="text" style="width:140px;" class="border-0 under_name_kana" name="under_name_kana" value="{{ old('under_name_kana') }}">
               </div>
               @foreach ($errors->get('under_name_kana') as $error)
-                <p class="error">※{{ $error }}</p><br>
+                <p class="error_message">※{{ $error }}</p><br>
               @endforeach
             </div>
           </div>
@@ -66,7 +66,7 @@
               <input type="mail" class="w-100 border-0 mail_address" name="mail_address" value="{{ old('mail_address') }}">
             </div>
             @foreach ($errors->get('mail_address') as $error)
-              <p class="error">※{{ $error }}</p><br>
+              <p class="error_message">※{{ $error }}</p><br>
             @endforeach
 
           </div>
@@ -164,7 +164,7 @@
           <label style="font-size:13px">月</label>
         </div>
         @foreach ($errors->get('datetime_validation') as $error)
-            <p class="error">※{{ $error }}</p><br>
+            <p class="error_message">※{{ $error }}</p><br>
         @endforeach
 
         <div class="mt-3">
@@ -193,7 +193,7 @@
             <input type="password" class="border-0 w-100 password" name="password">
           </div>
           @foreach ($errors->get('password') as $error)
-            <p class="error">※{{ $error }}</p><br>
+            <p class="error_message">※{{ $error }}</p><br>
           @endforeach
 
         </div>
@@ -203,7 +203,7 @@
             <input type="password" class="border-0 w-100 password_confirmation" name="password_confirmation">
           </div>
           @foreach ($errors->get('password_confirmation') as $error)
-            <p class="error">※{{ $error }}</p><br>
+            <p class="error_message">※{{ $error }}</p><br>
           @endforeach
 
         </div>
