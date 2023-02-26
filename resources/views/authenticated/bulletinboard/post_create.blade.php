@@ -47,9 +47,9 @@
         <p class="m-0">メインカテゴリー</p>
         <input type="text" class="w-100" name="main_category_name" form="mainCategoryRequest" required>
         <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="mainCategoryRequest">
-        @if($errors->has('main_category'))
-          @foreach ($errors->get('main_category') as $error)
-            <li>{{$error}}</li>
+        @if($errors->has('main_category_name'))
+          @foreach ($errors->get('main_category_name') as $error)
+            <li class="error_message">※{{$error}}</li>
           @endforeach
         @endif
       </div>
@@ -63,9 +63,9 @@
         </select>
         <input type="text" class="w-100" name="sub_category_name" form="subCategoryRequest" required>
         <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="subCategoryRequest">
-        @if($errors->has('sub_category'))
-          @foreach ($errors->get('sub_category') as $error)
-            <li>{{$error}}</li>
+        @if($errors->has('sub_category_name'))
+          @foreach ($errors->get('sub_category_name') as $error)
+            <li class="error_message">※{{$error}}</li>
           @endforeach
         @endif
       </div>

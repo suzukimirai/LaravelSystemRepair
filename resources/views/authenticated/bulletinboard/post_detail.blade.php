@@ -54,6 +54,9 @@
         <input type="hidden" name="post_id" form="commentRequest" value="{{ $post->id }}"><!-- post_idをhiddenで送る -->
         <input type="submit" class="btn btn-primary" form="commentRequest" value="投稿">
         <form action="{{ route('comment.create') }}" method="post" id="commentRequest">{{ csrf_field() }}</form>
+        @foreach ( $errors->get('comment') as $error )
+            <p class="error_message">※{{ $error }}</p>
+        @endforeach
       </div>
     </div>
   </div>

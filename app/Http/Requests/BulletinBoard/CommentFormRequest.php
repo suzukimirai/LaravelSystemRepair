@@ -24,13 +24,15 @@ class CommentFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment' => 'string|max:2500',
+            'comment' => 'string| max:2500 | required ',
         ];
     }
 
     public function messages(){
         return [
-            'comment' => 'タイトルは2500文字以内で入力してください。',
+            'comment.max' => 'コメントは2500文字以内で入力してください。',
+            'comment.string' => '文字列で入力してください。',
+            'comment.required' => '必須項目です。',
         ];
     }
 }
