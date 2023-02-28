@@ -4,6 +4,10 @@
     margin: 0;
     padding: 0;
 }
+
+button {
+    cursor: pointer;
+}
 /* body */
 .all_content {
     background: #ecf1f6;
@@ -21,16 +25,22 @@ li {
 
 /* サイドバー */
 .sidebar {
-    width: 150px;
+    width: 175px;
     height: 100vh;
     background-color: #03aad2;
     font-weight: bold;
 }
+
 .main-container {
     width: 100%;
 }
 .sidebar p a {
     color: #fff;
+}
+
+.sidebar p a:hover {
+    text-shadow: 0 0 3px #d26703;
+    text-decoration: none;
 }
 
 /* トップページ */
@@ -97,6 +107,8 @@ li {
 }
 
 /* 掲示板 */
+.bb_search_maincategory {
+}
 .sub_categories {
     display: none;
 }
@@ -195,11 +207,37 @@ li {
 .category_btn {
     font-size: 12px;
     border-radius: 5px;
-    padding: 0 5px;
+    padding: 1px 7px;
     border: none;
     background: #999;
     color: #fff;
 }
+
+.main_categories:before {
+    background-color: #555; /* 線色 */
+    border-radius: 5px; /* 線幅の半分 */
+    content: "";
+    display: inline-block;
+    height: 25px; /* 線の長さ */
+    margin-right: 5px; /* 線右の余白 */
+    vertical-align: middle;
+    width: 3px; /* 線幅 */
+}
+
+.category_btn:hover {
+    box-shadow: 0 0 7px #999;
+}
+
+.category_search .category {
+    margin-left: 15px;
+}
+
+.main_categories {
+    margin-top: 15px;
+    padding-left: 3px;
+    margin-left: 2px;
+}
+
 .main_categories span,
 .sub_categories li input {
     list-style: none;
@@ -207,11 +245,21 @@ li {
 }
 
 /* ユーザー検索 */
+.user_area_title {
+    color: #03aad2;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 25px;
+    margin-top: 5px;
+    padding-left: 11px;
+    width: 800px;
+    border-bottom: 2px solid #03aad2;
+}
 .reserve_users_area {
     display: flex;
     flex-wrap: wrap;
     width: 800px;
-    margin: 10px auto;
+    margin: 0px auto;
     height: 80vh;
     overflow: scroll;
     padding: 10px;
@@ -224,19 +272,136 @@ li {
 .one_person {
     width: 250px;
     height: 250px;
+    font-weight: bold;
+    border: 3px solid #fff;
+    background-color: #03aad2;
+    border-radius: 15px;
+    color: #fff;
+    padding-left: 5px;
+    padding-top: 5px;
+    font-family: "ヒラギノ角ゴ StdN", "Hiragino Kaku Gothic StdN", sans-serif;
 }
-.search_conditions span {
+
+.one_person a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.one_person a:hover {
+    text-shadow: 0 0 3px #d26703;
+    color: #fff;
+}
+
+.search_conditions {
+    position: relative;
     cursor: pointer;
+    border: 1px solid #000;
+    width: 140px;
+    padding-left: 2px;
 }
+
+.is_active {
+    margin-left: 6px;
+    margin-top: 7px;
+    position: absolute;
+    content: "";
+    border-top: 2px solid #000;
+    border-right: 2px solid #000;
+    width: 8px;
+    height: 8px;
+    transform: rotate(135deg);
+}
+
+.is_current {
+    margin-left: 4px;
+    margin-top: 8px;
+    position: absolute;
+    content: "";
+    border-top: 2px solid #000;
+    border-left: 2px solid #000;
+    width: 8px;
+    height: 8px;
+    transform: rotate(135deg);
+}
+.search_area {
+    border: 1px solid #666;
+    padding: 10px;
+    margin-right: 10px;
+}
+
 .search_conditions_inner {
     display: none;
     background: #fff;
 }
 .subject_edit_btn {
+    position: relative;
     font-size: 12px;
-    color: #0000ff;
+    color: #000;
     cursor: pointer;
+    border: 1px solid #000;
+    background-color: #e0dddd;
+    padding: 1px 13px 1px 3px;
 }
+
+.subject_edit_btn_div .is_current {
+    margin-top: 11px;
+    margin-left: 1px;
+    width: 7px;
+    height: 7px;
+    border-top: 1px solid #000;
+    border-left: 1px solid #000;
+}
+
+.subject_edit_btn_div .is_active {
+    margin-top: 9px;
+    margin-left: 3px;
+    width: 7px;
+    height: 7px;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.subject_edit_btn_div {
+    vertical-align: middle;
+    width: 105px;
+    height: 30px;
+    padding-left: 2px;
+}
+
+.subject_edit_btn_div p {
+    margin-bottom: 0px;
+}
+
 .subject_inner {
     display: none;
+}
+
+.user_search_div {
+    /* border: 1px solid #fff; */
+    border-radius: 10px;
+    background-color: #888;
+    height: 25px;
+    width: 74px;
+    color: #fff;
+    text-align: center;
+}
+
+.user_search_div:hover {
+    box-shadow: 0 0 5px #888;
+}
+
+.user_search_div input {
+    /* .user_search_div i { */
+    color: #fff;
+}
+
+.user_search {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    font: inherit;
+    outline: none;
 }

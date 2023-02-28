@@ -50,9 +50,9 @@ class RegisterFormRequest extends FormRequest
             'over_name_kana' => 'required | string | max:30 | katakana ',
             'under_name_kana' => 'required | string | max:30 | katakana ',
             'mail_address' => 'required | max:100 | email | unique:users',
-            'sex' => 'required',
+            'sex' => 'required | exists:users,sex',
             'datetime_validation' => 'required | after_or_equal:2000-01-01 | before:today',
-            'role' => 'required',
+            'role' => 'required | exists:users,role',
             'password' => 'required | between:8,30 ',
             'password_confirmation' => 'same:password',
         ];

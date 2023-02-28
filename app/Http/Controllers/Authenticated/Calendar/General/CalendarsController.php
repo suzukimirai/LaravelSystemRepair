@@ -36,4 +36,20 @@ class CalendarsController extends Controller
         }
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
+
+    public function delete(Request $request){//生徒が予約をキャンセルする。
+        DB::beginTransaction();
+        try{
+            $getPart = $request->getPart;//部数
+            $delete_date = $request->delete_date;//日付
+            // dd($request);
+            $reserve_settings = ReserveSettings::where('setting_reserve', $delete_date)->where('setting_part', $getPart)->first();//日付と部数からIDを取得
+            $reserve_settings->increment('limit_users');//incrementで人数を増やしている。
+            $reserve_settings->users()->detach(Auth::id());//今ログインしているユーザーが予約する
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollback();
+        }
+        return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
+    }
 }

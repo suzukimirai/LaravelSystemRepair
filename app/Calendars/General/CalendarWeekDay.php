@@ -28,7 +28,7 @@ class CalendarWeekDay{
 
   //   $startDay = $this->carbon->copy()->format("Y-m-01");//dを01にして強制的に一日にしてる？？
   //   $toDay = $this->carbon->copy()->format("Y-m-d");//フォーマットの違いは？？？
-  
+
   //   if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){//なんの条件分岐？？ //今日より前か後で違うクラスの付与
   //     return '<p class="day">受付終了</p>';//何日の部分のHTML
   //   }else{
@@ -63,7 +63,7 @@ class CalendarWeekDay{
 
      $html = [];
      $html[] = '<select name="getPart[]" class="border-primary" style="width:70px; border-radius:5px;" form="reserveParts">';
-     $html[] = '<option value="" selected ></option>';//選択されていない時のvalueが入ってしまっている。disabledにしてみた。
+     $html[] = '<option value="" selected ></option>';//選択されていない時のvalueが入ってしまっている。
      if($one_part_frame == "0"){//一部、残りの枠が0だったらtrue
        $html[] = '<option value="1" disabled>リモ1部(残り0枠)</option>';//disableで押せなくしている
      }else{

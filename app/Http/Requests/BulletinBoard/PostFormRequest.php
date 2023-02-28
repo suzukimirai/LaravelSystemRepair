@@ -24,7 +24,7 @@ class PostFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'post_category_id' => 'required | exists:sub_categories,id',
+            'post_category_id' => 'filled | exists:sub_categories,id',
             'post_title' => 'required | string | max:100',
             'post_body' => 'required | string | max:5000',
         ];
@@ -32,7 +32,6 @@ class PostFormRequest extends FormRequest
 
     public function messages(){
         return [
-            'post_category_id.required' => '必須項目です',
             'post_category_id.exists' => '無効なサブカテゴリーです。',
             'post_title.required' => '必須項目です',
             'post_title.max' => 'タイトルは100文字以内で入力してください。',
