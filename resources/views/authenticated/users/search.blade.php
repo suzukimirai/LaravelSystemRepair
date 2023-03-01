@@ -2,7 +2,7 @@
 
 @section('content')
 <div >
-    <p class="user_area_title ">ユーザー検索</p>
+    <p class="area_title ">ユーザー検索</p>
 </div>
 <div class="search_content w-100 d-flex">
   <div class="reserve_users_area">
@@ -58,7 +58,7 @@
   <div class="search_area w-25">
     <div class="">
       <div>
-        <input type="text" class="free_word" name="keyword" placeholder="キーワードを検索" form="userSearchRequest" >
+        <input type="text" class="free_word p-1" name="keyword" placeholder="キーワードを検索" form="userSearchRequest" >
       </div>
       <div class="mt-1">
         <label>カテゴリ</label>

@@ -117,9 +117,9 @@ class CalendarView{
     $html[] = '<dd class="date"></dd>';
     $html[] = '<dt>場所</dt>';
     $html[] = '<dd class="part"></dd>';
+    $html[] = '<dd>上記の予約をキャンセルしてもよろしいでしょうか？</dd>';
     $html[] = '</dl>';
-    $html[] = '<p>上記の予約をキャンセルしてもよろしいでしょうか？</p>';
-    $html[] = '<div class="w-50 m-auto deletet-modal-btn d-flex">';
+    $html[] = '<div class="w-50 m-auto delete-modal-btn d-flex">';
     $html[] = '<a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>';
     $html[] = '<input type="submit" class="btn btn-primary d-block" form="deleteParts" value="キャンセル">';
     $html[] = '<input type="hidden" class="delete_date"  form="deleteParts"  name="delete_date" style="font-size:12px" value=""></input>';

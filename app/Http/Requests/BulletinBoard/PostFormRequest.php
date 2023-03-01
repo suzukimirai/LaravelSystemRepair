@@ -25,7 +25,7 @@ class PostFormRequest extends FormRequest
     {
         return [
             'post_category_id' => 'filled | exists:sub_categories,id',
-            'post_title' => 'required | string | max:100',
+            'post_title' => 'required | string | max:100' ,
             'post_body' => 'required | string | max:5000',
         ];
     }
