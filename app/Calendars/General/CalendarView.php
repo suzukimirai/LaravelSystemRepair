@@ -69,10 +69,7 @@ class CalendarView{
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">'.$reservePart_name.'</p>';//過去日にスクール参加しているので「リモ一部」」を出す
             // $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
           }else{
-            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75 delete-modal-open delete_date"  style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart_name .'</button>';//予約ボタン
-            $html[] = '<input type="hidden"  name="getPart" value="'.$reservePart.'" form="deleteParts">';
-            $html[] = '<input type="hidden" class="getPart" name="getPart" value="'.$reservePart_name.'" >';
-
+            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75 delete-modal-open delete_date"  style="font-size:12px" data-date="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'" data-part="'.$reservePart.'" data-partName="'.$reservePart_name.'" >'. $reservePart_name .'</button>';//予約ボタン
           }
         }elseif($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){//予約してなかったら、セレクトを出す
 
@@ -122,12 +119,12 @@ class CalendarView{
     $html[] = '<div class="w-50 m-auto delete-modal-btn d-flex">';
     $html[] = '<a class="js-modal-close btn btn-danger d-inline-block" href="">閉じる</a>';
     $html[] = '<input type="submit" class="btn btn-primary d-block" form="deleteParts" value="キャンセル">';
-    $html[] = '<input type="hidden" class="delete_date"  form="deleteParts"  name="delete_date" style="font-size:12px" value=""></input>';
+    $html[] = '<input type="hidden" class="part_hidden"  form="deleteParts"  name="delete_date" style="font-size:12px" value=""></input>';//部数
+    $html[] = '<input type="hidden" class="date_hidden"  form="deleteParts"  name="getPart" style="font-size:12px" value=""></input>';//部数
     $html[] = '</div>';
     $html[] = '</div>';
     $html[] = '</div>';
     $html[] = '</div>';
-
 
     return implode('', $html);//最終的にrenderの戻り値となる
   }

@@ -4,7 +4,7 @@
 <div>
     <p class="area_title">投稿一覧</p>
 </div>
-<div class="board_area w-100 m-auto d-flex">
+<div class="board_area w-100 m-auto d-flex ">
   <div class="post_view w-75 mt-3">
     @foreach($posts as $post)
     <div class="post_area border w-75 m-auto p-3">
@@ -46,10 +46,14 @@
       <input type="submit" name="my_posts" class="category_btn" value="自分の投稿" form="postSearchRequest">
       <ul class="category_search">
         @foreach($categories as $category)
-        <li class="main_categories" category_id="{{ $category->id }}"><span >{{ $category->main_category }}<span></li>
-         @foreach($category->subCategories as $subCategory)
-          <li><button type="submit" value="{{ $subCategory->id }}" class="category_btn category" name="category_word" form="postSearchRequest">{{ $subCategory->sub_category }}</button></li>
-         @endforeach
+            <div class="main_category_modal_btn">
+                <li class="main_categories" category_id="{{ $category->id }}"><span >{{ $category->main_category }}<span><span class="sub_category_accordion is_current"></span></li>
+                <div class="sub_category_modal">
+                    @foreach($category->subCategories as $subCategory)
+                            <li ><button type="submit" value="{{ $subCategory->id }}" class="category_btn category" name="category_word" form="postSearchRequest">{{ $subCategory->sub_category }}</button></li>
+                    @endforeach
+                </div>
+            </div>
         @endforeach
       </ul>
     </div>

@@ -79,6 +79,10 @@
           <input type="radio" name="sex" id="sex-3" class="sex" value="3" {{ old('sex') === '3' ? 'checked' : '' }}>
           <label style="font-size:13px" for="sex-3">その他</label>
         </div>
+        @foreach ($errors->get('sex') as $error)
+            <p class="error_message">※{{ $error }}</p><br>
+        @endforeach
+
         <div class="mt-3">
           <label class="d-block m-0 aa" style="font-size:13px">生年月日</label>
           <select class="old_year" name="old_year">
@@ -178,6 +182,10 @@
           <input type="radio" name="role" id="role-4" class="other_role role" value="4" {{ old('role') === '4' ? 'checked' : '' }}>
           <label style="font-size:13px" class="other_role" for="role-4">生徒</label>
         </div>
+        @foreach ($errors->get('role') as $error)
+            <p class="error_message">※{{ $error }}</p><br>
+        @endforeach
+
         <div class="select_teacher d-none">
           <label class="d-block m-0" style="font-size:13px">選択科目</label>
           @foreach($subjects as $subject)
@@ -185,6 +193,10 @@
             <input type="checkbox" name="subject[]" value="{{ $subject->id }}" id="{{ $subject->id }}">
             <label for="{{ $subject->id }}">{{ $subject->subject }}</label>
           </div>
+          @foreach ($errors->get('subject') as $error)
+            <p class="error_message">※{{ $error }}</p><br>
+          @endforeach
+
           @endforeach
         </div>
         <div class="mt-3">
