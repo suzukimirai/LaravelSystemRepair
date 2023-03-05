@@ -44,11 +44,12 @@
       </div>
       <input type="submit" name="like_posts" class="category_btn" value="いいねした投稿" form="postSearchRequest">
       <input type="submit" name="my_posts" class="category_btn" value="自分の投稿" form="postSearchRequest">
+      <p class="category_top">カテゴリー</p>
       <ul class="category_search">
         @foreach($categories as $category)
             <div class="main_category_modal_btn">
                 <li class="main_categories" category_id="{{ $category->id }}"><span >{{ $category->main_category }}<span><span class="sub_category_accordion is_current"></span></li>
-                <div class="sub_category_modal">
+                <div class="sub_category_modal sub_category_modal_d_none">
                     @foreach($category->subCategories as $subCategory)
                             <li ><button type="submit" value="{{ $subCategory->id }}" class="category_btn category" name="category_word" form="postSearchRequest">{{ $subCategory->sub_category }}</button></li>
                     @endforeach

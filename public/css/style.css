@@ -323,10 +323,26 @@ li {
     margin-left: 15px;
 }
 
+.category_top {
+    font-size: 12px;
+    font-weight: bold;
+    /* color: #03aad2; */
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
 .main_categories {
-    margin-top: 15px;
     padding-left: 3px;
     margin-left: 2px;
+    position: relative;
+}
+
+.main_category_modal_btn:not(:first-of-type) {
+    margin-top: 15px;
+}
+
+.category_search div:first-of-type {
+    margin-top: 0px;
 }
 
 .main_categories span,
@@ -400,7 +416,10 @@ li {
     box-shadow: 0 0 3px #494949;
 }
 
-.is_active {
+.sub_category_accordion .is_current {
+}
+
+.is_current {
     margin-left: 6px;
     margin-top: 7px;
     position: absolute;
@@ -412,7 +431,13 @@ li {
     transform: rotate(135deg);
 }
 
-.is_current {
+.main_category_modal_btn .is_current {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.is_active {
     margin-left: 4px;
     margin-top: 8px;
     position: absolute;
@@ -423,6 +448,17 @@ li {
     height: 8px;
     transform: rotate(135deg);
 }
+
+.main_category_modal_btn .is_active {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.sub_category_modal_d_none {
+    display: none;
+}
+
 .search_area {
     border: 1px solid #666;
     padding: 10px;
@@ -472,7 +508,7 @@ li {
     box-shadow: 0 0 3px #494949;
 }
 
-.subject_edit_btn_div .is_current {
+.subject_edit_btn_div .is_active {
     margin-top: 11px;
     margin-left: 1px;
     width: 7px;
@@ -481,7 +517,7 @@ li {
     border-left: 1px solid #000;
 }
 
-.subject_edit_btn_div .is_active {
+.subject_edit_btn_div .is_current {
     margin-top: 9px;
     margin-left: 3px;
     width: 7px;
