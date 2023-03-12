@@ -57,35 +57,38 @@ class CalendarView{
         $html[] = $day->render();//何日を作るHTML。1日 2日の部分。blankの方だったら何も入らない。
 
         if(in_array($day->everyDay(), $day->authReserveDay())){//in_array関数、第一引数には、検索する値を指定し、第二引数には対象の配列を指定します。//予約してたら「リモ～部」で赤くなる
-          $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
-          if($reservePart == 1){
-            $reservePart_name = "リモ1部";
-          }else if($reservePart == 2){
-            $reservePart_name = "リモ2部";
-          }else if($reservePart == 3){
-            $reservePart_name = "リモ3部";
-          }
-          if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">'.$reservePart_name.'</p>';//過去日にスクール参加しているので「リモ一部」」を出す
-            // $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
-          }else{
-            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75 delete-modal-open delete_date"  style="font-size:12px" data-date="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'" data-part="'.$reservePart.'" data-partName="'.$reservePart_name.'" >'. $reservePart_name .'</button>';//予約ボタン
-          }
-        }elseif($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){//予約してなかったら、セレクトを出す
 
-          if(in_array($day->everyDay(), $day->authReserveDay())){//過去日にスクール参加していたらtrue
             $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
             if($reservePart == 1){
-              $html[] = '<p>リモ1部</p>';
+                $reservePart_name = "リモ1部";
             }else if($reservePart == 2){
-              $html[] = '<p>リモ2部</p>';
+                $reservePart_name = "リモ2部";
             }else if($reservePart == 3){
-              $html[] = '<p>リモ3部</p>';
+                $reservePart_name = "リモ3部";
             }
 
-          }else{//過去日にスクール参加していなかったら
-            $html[] = '<p>受付終了</p>';
-          }
+            if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){//過去だったら
+                $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px">'.$reservePart_name.'</p>';//過去日にスクール参加しているので「リモ一部」」を出す
+                // $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+            }else{
+                $html[] = '<button type="submit" class="btn btn-danger p-0 w-75 delete-modal-open delete_date"  style="font-size:12px" data-date="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'" data-part="'.$reservePart.'" data-partName="'.$reservePart_name.'" >'. $reservePart_name .'</button>';//予約ボタン
+            }
+
+        }elseif($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+
+            // if(in_array($day->everyDay(), $day->authReserveDay())){//過去日にスクール参加していたらtrue
+            //     $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
+            //     if($reservePart == 1){
+            //     $html[] = '<p>リモ1部</p>';
+            //     }else if($reservePart == 2){
+            //     $html[] = '<p>リモ2部</p>';
+            //     }else if($reservePart == 3){
+            //     $html[] = '<p>リモ3部</p>';
+            //     }
+
+            // }else{//過去日にスクール参加していなかったら
+                $html[] = '<p>受付終了</p>';
+            // }
 
          }else{
           $html[] = $day->selectPart($day->everyDay());//セレクトボックスを出す。
