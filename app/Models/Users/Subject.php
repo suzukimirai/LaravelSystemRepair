@@ -8,7 +8,7 @@ use App\Models\Users\User;
 
 class Subject extends Model
 {
-    protected $table = 'subject';
+    protected $table = 'subjects';
 
     const UPDATED_AT = null;
 
